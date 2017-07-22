@@ -12,6 +12,6 @@ public interface INBSDataType {
 	//Write yourself to a DataOutputStream
 	public void to(DataOutputStream out);
 	
-	//Return value
+	//Return data value
 	public Object getValue();
 }
