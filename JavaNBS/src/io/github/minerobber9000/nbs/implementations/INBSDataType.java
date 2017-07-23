@@ -7,10 +7,11 @@ public interface INBSDataType {
 	public DataType getType();
 	
 	//Using a DataInputStream, create yourself
-	public INBSDataType from(DataInputStream in);
+	//Can throw IOException.
+	public INBSDataType from(DataInputStream in) throws IOException;
 	
 	//Write yourself to a DataOutputStream
-	public void to(DataOutputStream out);
+	public void to(DataOutputStream out) throws IOException;
 	
 	//Return data value
 	public Object getValue();

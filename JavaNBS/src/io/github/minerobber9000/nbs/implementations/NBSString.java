@@ -2,6 +2,7 @@ package io.github.minerobber9000.nbs.implementations;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class NBSString implements INBSDataType {
 	
@@ -11,6 +12,10 @@ public class NBSString implements INBSDataType {
 	public NBSString(int len, char[] input) {
 		this.len = len;
 		this.input = input;
+	}
+	
+	public NBSString(int len, String input) {
+		this(len,input.toCharArray());
 	}
 	
 	public int getLength() {
@@ -32,13 +37,16 @@ public class NBSString implements INBSDataType {
 	}
 
 	@Override
-	public INBSDataType from(DataInputStream in) {
-		return new NBSString(12,"Hello World!".toCharArray());
+	public INBSDataType from(DataInputStream in) throws IOException {
+		return new NBSString(in.read(),in.readUTF());
 	}
 
 	@Override
-	public void to(DataOutputStream out) {
-		return;
+	public void to(DataOutputStream out) throws IOException {
+		out.writeInt(len);
+		for (char c : input) {
+			out.writeChar(c);
+		}
 	}
 	
 }
